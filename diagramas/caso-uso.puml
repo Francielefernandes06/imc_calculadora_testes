@@ -1,0 +1,18 @@
+@startuml
+
+actor "Usuário" as user
+
+usecase "Login no Sistema" as UC_Login
+usecase "Fazer Logout" as UC_Logout
+usecase "Cadastrar Pessoa" as UC_CadastrarPessoa
+usecase "Calcular IMC" as UC_CalcularIMC
+usecase "Listar Pessoas Cadastradas" as UC_ListarPessoas
+
+user --> UC_Login
+user --> UC_Logout
+user --> UC_CadastrarPessoa
+user --> UC_ListarPessoas
+
+UC_CadastrarPessoa --> UC_CalcularIMC : "usar cálculo de IMC"
+
+@enduml

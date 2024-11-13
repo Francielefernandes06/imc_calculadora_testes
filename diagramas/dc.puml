@@ -1,0 +1,44 @@
+@startuml
+
+namespace Src {
+
+    class Sistema {
+        - pessoas: List<Pessoa>
+        + logado: bool
+        + login(): void
+        + logout(): void
+    }
+
+    class ImcCalculator {
+        + calcularIMC(peso: float, altura: float): float
+        + verificarAlerta(imc: float): bool
+    }
+
+    class Pessoa {
+        - nome: string
+        - email: string
+        - telefone: string
+        - idade: int
+        - peso: float
+        - altura: float
+        - imc: float
+        - alertaGerado: bool
+        + __construct(nome: string, email: string, telefone: string, idade: int, peso: float, altura: float)
+        + setImc(imc: float): void
+        + setAlertaGerado(status: bool): void
+        + __toString(): string
+        + cadastrarPessoa(repository: PessoaRepository, imcCalculator: ImcCalculator): void
+    }
+
+    class PessoaRepository {
+        - pessoas: List<Pessoa>
+        + adicionarPessoa(pessoa: Pessoa): void
+        + listarPessoas(): List<Pessoa>
+    }
+
+    Sistema "1" *-- "0..*" Pessoa
+    PessoaRepository "1" *-- "0..*" Pessoa
+    Pessoa ..> ImcCalculator : "calcula IMC usando"
+}
+
+@enduml 
